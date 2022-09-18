@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 # books, members, transactions
 
@@ -8,15 +8,14 @@ app = Flask(__name__)
 def helloworld():
     return 'Hello, world!'
 
+@app.route('/books')
+def book():
+    return render_template("books.html")
+
 @app.route('/members')
 def members():
-    return 'Members!'
-
-
-@app.route('/books')
-def books():
-    return 'Books!'
+    return "Members!"
 
 @app.route('/transactions')
-def books():
-    return 'Transactions!'
+def members():
+    return "Transactions!"
