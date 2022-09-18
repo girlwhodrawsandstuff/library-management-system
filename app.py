@@ -13,9 +13,9 @@ def book():
     return render_template("books.html")
 
 @app.route('/members')
-def libraryMembers():
+def members():
     return "Members!"
 
 @app.route('/transactions')
-def members():
+def transactions():
     return "Transactions!"
