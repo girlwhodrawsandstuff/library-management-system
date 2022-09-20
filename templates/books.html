@@ -4,27 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
     <title>Books</title>
 </head>
 <body>
     <h1>Books</h1>
+    <form>
+        <div>
+            <label>Title</label>
+            <input>
+        </div>
+        <div>
+            <label>Author</label>
+            <input>
+        </div>
+        <div>
+            <label>ISBN Number</label>
+            <input>
+        </div>
+        <div>
+            <label>Publication</label>
+            <input>
+        </div>
+        <div>
+            <label>Quantity</label>
+            <input>
+        </div>
+        <button>Add Book</button>
+    </form>
     <table>
         <thead>
             <tr>
                 <th>Title</th>
                 <th>Author</th>
+                <th>Publication</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>Harry Potter</td>
                 <td>JK Rowling</td>
+                <td>Bloomsbury</td>
             </tr>
             <tr>
                 <td>Lord of the Rings</td>
                 <td>JRR Tolkien</td>
+                <td>Allen & Unwin</td>
             </tr>
         </tbody>
     </table>
+    <script src="/static/books.js"></script>
 </body>
 </html>
