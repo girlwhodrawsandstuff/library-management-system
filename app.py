@@ -1,17 +1,13 @@
 from flask import Flask, render_template
 import requests
-import sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 
 # books, members, transactions
 
 app = Flask(__name__)
 
-db = sqlalchemy(app)
-
-url = 'https://frappe.io/api/method/frappe-library'
-
-response = requests.get(url)
-formatted_response = response.json()
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 class Books(db.Model):
@@ -20,6 +16,7 @@ class Books(db.Model):
     authors = db.Column(db.String(250))
     isbn = db.Column(db.Integer)
     publisher = db.Column(db.String(250))
+    stock = db.Column(db.Integer)
     borrowed_by = db.Column(db.String(200))  # TODO: needs to change unit
     # TODO: add pages
 
@@ -32,6 +29,19 @@ class Members(db.Model):
     borrowed_books = db.Column(db.String(200))  # TODO: needs to change unit
 
 
+url = 'https://frappe.io/api/method/frappe-library'
+
+
+def join_string(text):
+    return text
+
+
+response = requests.get(url)
+obj = response.json().get('message')
+mapped_obj = list(map(join_string, obj))
+books = Books(**{k: obj[k] for k in ('bookID', 'title', 'authors', 'isbn', 'publisher') if k in obj})
+
+
 @app.route('/')
 def helloworld():
     return 'Hello, world!'
@@ -39,7 +49,7 @@ def helloworld():
 
 @app.route('/books')
 def book():
-    return render_template("books.html", data=formatted_response)
+    return render_template("books.html", data=books)
 
 
 @app.route('/members')
