@@ -2,7 +2,67 @@
 
 * {
     margin: 0;
+    font-family: "BlinkMacSystemFont", "Segoe UI"," Roboto"," Oxygen"," Ubuntu"," Cantarell"," Fira Sans"," Droid Sans"," Helvetica Neue", sans-serif;
+
 }
+
+
+/* navbar.html */
+.sidebar {
+    position: fixed;
+    width: 241px;
+    height: 100vh;
+    background: #ffffff;
+    overflow: hidden;
+    z-index: 1;
+    border: 1px solid #e2e6e9;
+}
+
+.sidebar-nav {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-item {
+    width: 100%;
+    list-style: none;
+}
+
+.sidebar-link {
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #0e69b9;
+    transition: all 0.1s;
+}
+
+.sidebar-link:hover {
+    background: #e2e2e2;
+}
+
+.icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.icon .fas {
+    font-size: 24px;
+}
+
+.title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
 
 
 /* books.html */
