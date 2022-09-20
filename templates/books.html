@@ -1,58 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="/static/css/style.css" />
     <title>Books</title>
 </head>
+
 <body>
-    <h1>Books</h1>
-    <form>
-        <div>
-            <label>Title</label>
-            <input>
+    <div class="page">
+        <h1 class="page__title">Books</h1>
+        <div class="page__tools">
+            <button class="open-book-modal" id="open-modal">Add New Book</button>
         </div>
-        <div>
-            <label>Author</label>
-            <input>
+        <div class="page__modal" id="modal">
+            <div class="modal__content">
+                <div class="modal__close">
+                    <button class="modal__close__button" id="close-modal">&times;</button>
+                </div>
+                <form class="">
+                    <div>
+                        <label>Title</label>
+                        <input>
+                    </div>
+                    <div>
+                        <label>Author</label>
+                        <input>
+                    </div>
+                    <div>
+                        <label>ISBN Number</label>
+                        <input>
+                    </div>
+                    <div>
+                        <label>Publication</label>
+                        <input>
+                    </div>
+                    <div>
+                        <label>Quantity</label>
+                        <input>
+                    </div>
+                    <button>Add Book</button>
+                </form>
+            </div>
         </div>
-        <div>
-            <label>ISBN Number</label>
-            <input>
-        </div>
-        <div>
-            <label>Publication</label>
-            <input>
-        </div>
-        <div>
-            <label>Quantity</label>
-            <input>
-        </div>
-        <button>Add Book</button>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Publication</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Harry Potter</td>
-                <td>JK Rowling</td>
-                <td>Bloomsbury</td>
-            </tr>
-            <tr>
-                <td>Lord of the Rings</td>
-                <td>JRR Tolkien</td>
-                <td>Allen & Unwin</td>
-            </tr>
-        </tbody>
-    </table>
-    <script src="/static/books.js"></script>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publication</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Harry Potter</td>
+                    <td>JK Rowling</td>
+                    <td>Bloomsbury</td>
+                </tr>
+                <tr>
+                    <td>Lord of the Rings</td>
+                    <td>JRR Tolkien</td>
+                    <td>Allen & Unwin</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="/static/js/books.js"></script>
 </body>
+
 </html>
