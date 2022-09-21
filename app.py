@@ -44,7 +44,7 @@ books = Books(**{k: obj[k] for k in ('bookID', 'title', 'authors', 'isbn', 'publ
 
 @app.route('/')
 def helloworld():
-    return 'Hello, world!'
+    return render_template("home.html")
 
 
 @app.route('/books')
@@ -54,12 +54,12 @@ def book():
 
 @app.route('/members')
 def members():
-    return "Members!"
+    return render_template("members.html")
 
 
 @app.route('/transactions')
 def transactions():
-    return "Transactions!"
+    return render_template("transactions.html")
 
 
 if __name__ == "__main__":
