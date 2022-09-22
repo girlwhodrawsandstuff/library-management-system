@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="shortcut icon" href="#" />
     <title>Books</title>
     <script
       src="https://kit.fontawesome.com/c20afc23a5.js"
@@ -60,7 +60,7 @@
             </button>
           </div>
 
-          <table>
+          <table class="booklist">
             <thead>
               <tr>
                 <th>Title</th>
@@ -71,20 +71,15 @@
               </tr>
             </thead>
             <tbody>
+              {% for book in books %}
               <tr>
-                <td>Harry Potter</td>
-                <td>JK Rowling</td>
-                <td>1231243</td>
-                <td>Bloomsbury</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.authors }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.publisher }}</td>
                 <td>1</td>
               </tr>
-              <tr>
-                <td>Lord of the Rings</td>
-                <td>JRR Tolkien</td>
-                <td>34342534</td>
-                <td>Allen & Unwin</td>
-                <td>4</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>

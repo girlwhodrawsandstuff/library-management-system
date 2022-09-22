@@ -64,7 +64,8 @@ def helloworld():
 
 @app.route('/books')
 def book():
-    return render_template("books.html")
+    list_of_books = Books.query.all()
+    return render_template("books.html", books=list_of_books)
 
 
 @app.route('/members')
