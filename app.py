@@ -45,6 +45,8 @@ def remove_dict_key_whitespaces(dictionary):
 
 
 def add_to_database(list_of_dicts):
+    if Books.query.count() > 0:
+        return
     for d in list_of_dicts:
         book_item = remove_dict_key_whitespaces(d)
         book_entry = Books(**book_item)
