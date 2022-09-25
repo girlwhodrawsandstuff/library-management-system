@@ -23,16 +23,16 @@ class Books(db.Model):
     publication_date = db.Column(db.String(250))
     publisher = db.Column(db.String(250))
     stock = db.Column(db.Integer)
-    borrowed_by = db.Column(db.String(200))  # TODO: needs to change unit
+    owner_id = db.Column(db.Integer, db.ForeignKey('members.id'))
 
 
 class Members(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
+    _id = db.Column("id", db.Integer, primary_key=True, nullable=False)
     username = db.Column(db.String(20), unique=True)
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
     outstanding_debt = db.Column(db.String(100))
-    borrowed_books = db.Column(db.String(200))  # TODO: needs to change unit
+    borrowed_books = db.relationship('Books', backref='owner')
 
 
 url = 'https://frappe.io/api/method/frappe-library'
