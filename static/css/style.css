@@ -119,3 +119,8 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.booklist {
+    max-width: 70vw;
+    overflow: scroll;
+}
