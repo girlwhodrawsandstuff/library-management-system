@@ -75,7 +75,7 @@
                 <td>{{ member.borrowed_to_date }}</td>
                 <td>{{ member.actual_return_date }}</td>
                 <td>{{ member.outstanding_debt }}</td>
-                <td><span class="icon"><a href="#"><i class="fas fa-edit"></i></span></a></td>
+                <td><span class="icon"><a href="/delete-member/{{ member.memberID }}"><i class="fas fa-trash"></i></span></a></td>
               </tr>
               {% endfor %}
             </tbody>

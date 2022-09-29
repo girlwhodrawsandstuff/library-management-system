@@ -101,6 +101,14 @@ def add_to_members():
     return redirect(url_for("members"))
 
 
+@app.route('/delete-member/<string:member_id>')
+def delete_member(member_id):
+    member = Members.query.filter_by(memberID=member_id).first()
+    db.session.delete(member)
+    db.session.commit()
+    return redirect(url_for("members"))
+
+
 @app.route('/transactions')
 def transactions():
     return render_template("transactions.html")
