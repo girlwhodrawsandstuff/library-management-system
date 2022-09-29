@@ -61,6 +61,7 @@
                 <th>Due Date</th>
                 <th>Date of Return</th>
                 <th>Outstanding Debt</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -69,6 +70,12 @@
                 <td>{{ member.username }}</td>
                 <td>{{ member.first_name }}</td>
                 <td>{{ member.last_name }}</td>
+                <td>{{ member.borrowed_book }}</td>
+                <td>{{ member.borrowed_from_date }}</td>
+                <td>{{ member.borrowed_to_date }}</td>
+                <td>{{ member.actual_return_date }}</td>
+                <td>{{ member.outstanding_debt }}</td>
+                <td><span class="icon"><a href="#"><i class="fas fa-edit"></i></span></a></td>
               </tr>
               {% endfor %}
             </tbody>
