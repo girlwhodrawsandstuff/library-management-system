@@ -71,13 +71,13 @@ def helloworld():
     return render_template("home.html")
 
 
-@app.route('/books')
-def book():
+@app.route('/books', methods=["GET"])
+def books():
     list_of_books = Books.query.all()
     return render_template("books.html", books=list_of_books)
 
 
-@app.route("/add-book", methods=["POST"])
+@app.route('/add-book', methods=["POST"])
 def add_to_books():
     book_id = request.form.get('book_id')
     title = request.form.get('title')
@@ -96,10 +96,18 @@ def add_to_books():
                      no_of_copies_total=quantity)
     db.session.add(new_book)
     db.session.commit()
-    return redirect(url_for("members"))
+    return redirect(url_for("books"))
 
 
-@app.route('/members')
+@app.route('/delete-book/<string:book_id>')
+def delete_book(book_id):
+    book = Books.query.filter_by(bookID=book_id).first()
+    db.session.delete(book)
+    db.session.commit()
+    return redirect(url_for("books"))
+
+
+@app.route('/members', methods=["GET"])
 def members():
     list_of_members = Members.query.all()
     return render_template("members.html", members=list_of_members)
@@ -131,7 +139,7 @@ def delete_member(member_id):
     return redirect(url_for("members"))
 
 
-@app.route('/transactions')
+@app.route('/transactions', methods=["GET"])
 def transactions():
     return render_template("transactions.html")
 
