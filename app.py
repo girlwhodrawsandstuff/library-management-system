@@ -57,10 +57,8 @@ def add_to_database(list_of_dicts):
         return
     for d in list_of_dicts:
         book_item = remove_dict_key_whitespaces(d)
-        book_entry = Books(**book_item)
-        no_of_copies = Books(no_of_copies_total=1)
+        book_entry = Books(**book_item, no_of_copies_total=1)
         db.session.add(book_entry)
-        db.session.add(no_of_copies)
         db.session.commit()
 
 
