@@ -65,30 +65,32 @@
             </button>
           </div>
 
-          <table class="booklist">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>ISBN</th>
-                <th>Publisher</th>
-                <th>Quantity</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for book in books %}
-              <tr>
-                <td>{{ book.title }}</td>
-                <td>{{ book.authors }}</td>
-                <td>{{ book.isbn }}</td>
-                <td>{{ book.publisher }}</td>
-                <td>{{ book.no_of_copies_total}}</td>
-                <td><span class="icon"><a href="/delete-book/{{ book.bookID }}"><i class="fas fa-trash"></i></span></a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>ISBN</th>
+                  <th>Publisher</th>
+                  <th>Quantity</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for book in books %}
+                <tr>
+                  <td>{{ book.title }}</td>
+                  <td>{{ book.authors }}</td>
+                  <td>{{ book.isbn }}</td>
+                  <td>{{ book.publisher }}</td>
+                  <td>{{ book.no_of_copies_total}}</td>
+                  <td><span class="icon"><a href="/delete-book/{{ book.bookID }}"><i class="fas fa-trash"></i></span></a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

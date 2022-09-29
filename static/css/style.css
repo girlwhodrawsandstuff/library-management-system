@@ -25,6 +25,14 @@
     padding: 12px 24px;
 }
 
+.table-container {
+    height: 100vh;
+    overflow: scroll;
+}
+
+.table {
+    max-width: 100%;
+}
 
 /* navbar.html */
 .sidebar {
@@ -118,9 +126,4 @@
 .modal__close {
     display: flex;
     justify-content: flex-end;
-}
-
-.booklist {
-    max-width: 70vw;
-    overflow: scroll;
 }
