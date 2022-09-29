@@ -2,6 +2,10 @@ from flask import Flask, render_template
 import requests
 from flask_sqlalchemy import SQLAlchemy
 
+# This assumes that one member can borrow one book at a time
+# But a book can be borrowed by many members as long as
+# there is sufficient stock of the book
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
@@ -22,7 +26,8 @@ class Books(db.Model):
     text_reviews_count = db.Column(db.String(250))
     publication_date = db.Column(db.String(250))
     publisher = db.Column(db.String(250))
-    stock = db.Column(db.Integer)
+    no_of_copies_total = db.Column(db.Integer)
+    no_of_copies_current = db.Column(db.Integer)
     owner_id = db.Column(db.Integer, db.ForeignKey('members.id'))
 
 
@@ -31,8 +36,11 @@ class Members(db.Model):
     username = db.Column(db.String(20), unique=True)
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
-    outstanding_debt = db.Column(db.String(100))
-    borrowed_books = db.relationship('Books', backref='owner')
+    outstanding_debt = db.Column(db.Integer)
+    borrowed_from_date = db.Column(db.DateTime)
+    borrowed_to_date = db.Column(db.DateTime)
+    actual_return_date = db.Column(db.DateTime)
+    borrowed_book = db.relationship('Books', backref='owner')
 
 
 url = 'https://frappe.io/api/method/frappe-library'
@@ -50,7 +58,9 @@ def add_to_database(list_of_dicts):
     for d in list_of_dicts:
         book_item = remove_dict_key_whitespaces(d)
         book_entry = Books(**book_item)
+        no_of_copies = Books(no_of_copies_total=1)
         db.session.add(book_entry)
+        db.session.add(no_of_copies)
         db.session.commit()
 
 
