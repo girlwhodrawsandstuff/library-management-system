@@ -77,6 +77,28 @@ def book():
     return render_template("books.html", books=list_of_books)
 
 
+@app.route("/add-book", methods=["POST"])
+def add_to_books():
+    book_id = request.form.get('book_id')
+    title = request.form.get('title')
+    authors = request.form.get('authors')
+    isbn = request.form.get('isbn')
+    publisher = request.form.get('publisher')
+    quantity = request.form.get('quantity')
+
+    given_id = Books.query.filter_by(bookID=book_id).count()
+    given_isbn = Books.query.filter_by(isbn=isbn).count()
+
+    if given_id != 0 or given_isbn != 0:
+        return "This book is already in stock"
+
+    new_book = Books(bookID=book_id, title=title, authors=authors, isbn=isbn, publisher=publisher,
+                     no_of_copies_total=quantity)
+    db.session.add(new_book)
+    db.session.commit()
+    return redirect(url_for("members"))
+
+
 @app.route('/members')
 def members():
     list_of_members = Members.query.all()

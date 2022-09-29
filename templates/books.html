@@ -22,28 +22,32 @@
               &times;
             </button>
           </div>
-          <form>
-            <div>
-              <label>Title</label>
-              <input type="text"/>
+          <form action="/add-book" method="post">
+             <div>
+              <label for="book_id">Book ID</label>
+              <input type="text" name="book_id" id="book_id" required />
             </div>
             <div>
-              <label>Author</label>
-              <input type="text" />
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" required />
             </div>
             <div>
-              <label>ISBN</label>
-              <input type="number" />
+              <label for="authors">Authors</label>
+              <input type="text" name="authors" id="authors" required />
             </div>
             <div>
-              <label>Publication</label>
-              <input type="text" />
+              <label for="isbn">ISBN</label>
+              <input type="text" name="isbn" id="isbn" required />
             </div>
             <div>
-              <label>Quantity</label>
-              <input type="number" />
+              <label for="publisher">Publisher</label>
+              <input type="text" name="publisher" id="publisher" required />
             </div>
-            <button>Add Book</button>
+            <div>
+              <label for="quantity">Quantity</label>
+              <input type="number" name="quantity" id="quantity" required />
+            </div>
+            <button type="submit">Add Book</button>
           </form>
         </div>
       </div>
@@ -67,8 +71,9 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>ISBN</th>
-                <th>Publication</th>
+                <th>Publisher</th>
                 <th>Quantity</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -79,6 +84,7 @@
                 <td>{{ book.isbn }}</td>
                 <td>{{ book.publisher }}</td>
                 <td>{{ book.no_of_copies_total}}</td>
+                <td><span class="icon"><a href="/delete-book/{{ book.bookID }}"><i class="fas fa-trash"></i></span></a></td>
               </tr>
               {% endfor %}
             </tbody>
@@ -87,6 +93,6 @@
       </div>
     </div>
 
-    <script src="/static/js/books.js"></script>
+    <script src="/static/js/utils.js"></script>
   </body>
 </html>
