@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
+import uuid
 import requests
 from flask_sqlalchemy import SQLAlchemy
 
@@ -14,8 +15,8 @@ db = SQLAlchemy(app)
 
 
 class Books(db.Model):
-    bookID = db.Column(db.String(250), primary_key=True)
-    title = db.Column(db.String(250))
+    bookID = db.Column(db.String(250), primary_key=True, nullable=False)
+    title = db.Column(db.String(250), nullable=False)
     authors = db.Column(db.String(250))
     average_rating = db.Column(db.String(250))
     isbn = db.Column(db.String(250))
@@ -32,10 +33,10 @@ class Books(db.Model):
 
 
 class Members(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True, nullable=False)
-    username = db.Column(db.String(20), unique=True)
-    first_name = db.Column(db.String(100))
-    last_name = db.Column(db.String(100))
+    memberID = db.Column("id", db.String(255), primary_key=True, nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
     outstanding_debt = db.Column(db.Integer)
     borrowed_from_date = db.Column(db.DateTime)
     borrowed_to_date = db.Column(db.DateTime)
@@ -78,7 +79,26 @@ def book():
 
 @app.route('/members')
 def members():
-    return render_template("members.html")
+    list_of_members = Members.query.all()
+    return render_template("members.html", members=list_of_members)
+
+
+@app.route("/add-member", methods=["POST"])
+def add_to_members():
+    member_uuid = uuid.uuid4()
+    member_id = str(member_uuid)
+    username = request.form.get("username")
+    rows = Members.query.filter_by(username=username).count()
+
+    if rows != 0:
+        return "Username is already taken"
+
+    first_name = request.form.get("first-name")
+    last_name = request.form.get("last-name")
+    new_member = Members(memberID=member_id, username=username, first_name=first_name, last_name=last_name)
+    db.session.add(new_member)
+    db.session.commit()
+    return redirect(url_for("members"))
 
 
 @app.route('/transactions')
