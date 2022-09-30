@@ -44,6 +44,16 @@ class Members(db.Model):
     book_id = db.Column(db.String(250), db.ForeignKey('books.bookID'))
 
 
+class Transactions(db.Model):
+    transaction_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    username = db.Column(db.String(20))
+    title = db.Column(db.String(250))
+    authors = db.Column(db.String(250))
+    date_of_issue = db.Column(db.DateTime)
+    due_date = db.Column(db.DateTime)
+    date_of_return = db.Column(db.DateTime)
+
+
 url = 'https://frappe.io/api/method/frappe-library'
 response = requests.get(url)
 obj = response.json().get('message')
@@ -63,7 +73,7 @@ def add_to_database(list_of_dicts):
         db.session.commit()
 
 
-add_to_database(obj)
+# add_to_database(obj)
 
 
 @app.route('/')
