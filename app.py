@@ -73,7 +73,7 @@ def add_to_database(list_of_dicts):
         db.session.commit()
 
 
-# add_to_database(obj)
+add_to_database(obj)
 
 
 @app.route('/')
