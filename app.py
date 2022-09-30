@@ -29,7 +29,7 @@ class Books(db.Model):
     publisher = db.Column(db.String(250))
     no_of_copies_total = db.Column(db.Integer)
     no_of_copies_current = db.Column(db.Integer)
-    owner_id = db.Column(db.Integer, db.ForeignKey('members.id'))
+    borrowed_by = db.relationship('Members', backref='owner')
 
 
 class Members(db.Model):
@@ -41,7 +41,7 @@ class Members(db.Model):
     borrowed_from_date = db.Column(db.DateTime)
     borrowed_to_date = db.Column(db.DateTime)
     actual_return_date = db.Column(db.DateTime)
-    borrowed_book = db.relationship('Books', backref='owner')
+    book_id = db.Column(db.String(250), db.ForeignKey('books.bookID'))
 
 
 url = 'https://frappe.io/api/method/frappe-library'
