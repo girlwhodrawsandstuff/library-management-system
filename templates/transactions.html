@@ -13,76 +13,104 @@
     ></script>
   </head>
   <body>
-    {% include 'title.html' %}
+    <div class="page">
+      {% include 'title.html' %}
 
-    <div class="page__section">
-      {% include 'navbar.html' %}
+      <div class="page__section">
+        {% include 'navbar.html' %}
 
-      <div class="page__main">
-        <h2>Transactions</h2>
-        <div>
-          <details>
-            <summary>Issue Book</summary>
-            <form>
-              <div>
-                <label for="username">Username</label>
-                <input type="text" name="username" />
-              </div>
-              <div>
-                <label for="book-id">Book ID</label>
-                <input type="text" name="book-id" />
-              </div>
-              <div>
-                <label for="title">Book Title</label>
-                <input type="text" name="title" />
-              </div>
-              <div>
-                <label for="authors">Book Authors</label>
-                <input type="text" name="authors" />
-              </div>
-              <div>
-                <label for="date-of-issue">Date of Issue</label>
-                <input type="date" name="date-of-issue" />
-              </div>
-              <button type="submit">Issue Book</button>
-            </form>
-          </details>
-          <details>
-            <summary>Return Book</summary>
-            <form>
-                <div>
-                  <label for="username">Username</label>
-                  <input type="text" name="username" />
-                </div>
-                <div>
-                  <label for="book-id">Book ID</label>
-                  <input type="text" name="book-id" />
-                </div>
-                <div>
-                  <label for="title">Book Title</label>
-                  <input type="text" name="title" />
-                </div>
-                <div>
-                  <label for="authors">Book Authors</label>
-                  <input type="text" name="authors" />
-                </div>
-                <div>
-                  <label for="date-of-return">Date of Return</label>
-                  <input type="date" name="date-of-return" />
-                </div>
-                <button type="submit">Issue Book</button>
-              </form>
-          </details>
-          <details>
-            <summary>Clear Outstanding Debt</summary>
-            <form>
-                <div>
-                  <label for="username">Username</label>
-                  <input type="text" name="username" id="username" />
-                </div>
-                <button type="submit">Clear Outstanding Debt</button>
-              </form>
-          </details>
+        <div class="page__main">
+          <h2>Transactions</h2>
+          <div class="transaction__divisions">
+            <div class="transaction__container">
+              <details class="transaction__detail">
+                <summary>Issue Book</summary>
+                <form class="transaction__form">
+                  <div class="transaction__form__item">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="book-id">Book ID</label>
+                    <input type="text" name="book-id" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="title">Book Title</label>
+                    <input type="text" name="title" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="authors">Book Authors</label>
+                    <input type="text" name="authors" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="date-of-issue">Date of Issue</label>
+                    <input type="date" name="date-of-issue" />
+                  </div>
+                  <button type="submit">Issue Book</button>
+                </form>
+              </details>
+              <details class="transaction__detail">
+                <summary>Return Book</summary>
+                <form class="transaction__form">
+                  <div class="transaction__form__item">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="book-id">Book ID</label>
+                    <input type="text" name="book-id" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="title">Book Title</label>
+                    <input type="text" name="title" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="authors">Book Authors</label>
+                    <input type="text" name="authors" />
+                  </div>
+                  <div class="transaction__form__item">
+                    <label for="date-of-return">Date of Return</label>
+                    <input type="date" name="date-of-return" />
+                  </div>
+                  <button type="submit">Issue Book</button>
+                </form>
+              </details>
+              <details class="transaction__detail">
+                <summary>Clear Outstanding Debt</summary>
+                <form class="transaction__form">
+                  <div class="transaction__form__item">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" />
+                  </div>
+                  <button type="submit">Clear Outstanding Debt</button>
+                </form>
+              </details>
+            </div>
+            <div class="transaction__table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Book Borrowed</th>
+                    <th>Authors</th>
+                    <th>Date of Issue</th>
+                    <th>Due Date</th>
+                    <th>Date of Return</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>girlwhodrawsandstuff</td>
+                    <td>Harry Potter</td>
+                    <td>JK Rowling</td>
+                    <td>30/9/2022</td>
+                    <td>30/10/2022</td>
+                    <td>29/10/2022</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

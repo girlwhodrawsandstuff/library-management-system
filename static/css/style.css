@@ -128,3 +128,38 @@
     display: flex;
     justify-content: flex-end;
 }
+
+/* Transactions */
+.transaction__divisions {
+    display: flex;
+}
+
+.transaction__container {
+    width: 24em;
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction__table {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.transaction__form {
+    padding: 8px 0;
+}
+
+.transaction__form__item {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0;
+}
+
+.transaction__detail {
+    margin: 16px 0;
+    padding: 12px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+}
