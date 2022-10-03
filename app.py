@@ -174,8 +174,6 @@ def issue_book():
     due_date = due_datetime
     current_stock = book_item.no_of_copies_current
 
-    print(username_rows)
-
     if username_rows == 0:
         return "Username does not exist"
 
@@ -192,6 +190,10 @@ def issue_book():
     authors = book_item.authors
     book_item.no_of_copies_current = current_stock - 1
     member.has_borrowed = True
+    member.borrowed_from_date = date_of_issue
+    member.borrowed_to_date = due_date
+    member.actual_return_date = None
+    member.book_id = book_id
 
     new_transaction = Transactions(book_id=book_id, username=username, title=title, authors=authors,
                                    date_of_issue=date_of_issue, due_date=due_date)
