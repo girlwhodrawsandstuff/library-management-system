@@ -25,7 +25,7 @@
             <div class="transaction__container">
               <details class="transaction__detail">
                 <summary>Issue Book</summary>
-                <form class="transaction__form">
+                <form class="transaction__form" action="/issue-book" method="post">
                   <div class="transaction__form__item">
                     <label for="username">Username</label>
                     <input type="text" name="username" required />
@@ -33,14 +33,6 @@
                   <div class="transaction__form__item">
                     <label for="book-id">Book ID</label>
                     <input type="text" name="book-id" required />
-                  </div>
-                  <div class="transaction__form__item">
-                    <label for="title">Book Title</label>
-                    <input type="text" name="title" required />
-                  </div>
-                  <div class="transaction__form__item">
-                    <label for="authors">Book Authors</label>
-                    <input type="text" name="authors" required />
                   </div>
                   <div class="transaction__form__item">
                     <label for="date-of-issue">Date of Issue</label>
@@ -99,14 +91,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for transaction in transactions_list %}
                   <tr>
-                    <td>girlwhodrawsandstuff</td>
-                    <td>Harry Potter</td>
-                    <td>JK Rowling</td>
-                    <td>30/9/2022</td>
-                    <td>30/10/2022</td>
-                    <td>29/10/2022</td>
+                    <td>{{ transaction.username }}</td>
+                    <td>{{ transaction.title }}</td>
+                    <td>{{ transaction.authors }}</td>
+                    <td>{{ transaction.date_of_issue }}</td>
+                    <td>{{ transaction.due_date }}</td>
+                    <td>{{ transaction.date_of_return }}</td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

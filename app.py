@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import uuid
 import requests
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 # This assumes that one member can borrow one book at a time
 # But a book can be borrowed by many members as long as
@@ -38,6 +39,7 @@ class Members(db.Model):
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     outstanding_debt = db.Column(db.Integer)
+    has_borrowed = db.Column(db.Boolean, default=False)
     borrowed_from_date = db.Column(db.DateTime)
     borrowed_to_date = db.Column(db.DateTime)
     actual_return_date = db.Column(db.DateTime)
@@ -46,8 +48,9 @@ class Members(db.Model):
 
 class Transactions(db.Model):
     transaction_id = db.Column(db.Integer, primary_key=True, nullable=False)
-    username = db.Column(db.String(20))
-    title = db.Column(db.String(250))
+    book_id = db.Column(db.String(250), nullable=False)
+    username = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(250), nullable=False)
     authors = db.Column(db.String(250))
     date_of_issue = db.Column(db.DateTime)
     due_date = db.Column(db.DateTime)
@@ -68,7 +71,7 @@ def add_to_database(list_of_dicts):
         return
     for d in list_of_dicts:
         book_item = remove_dict_key_whitespaces(d)
-        book_entry = Books(**book_item, no_of_copies_total=1)
+        book_entry = Books(**book_item, no_of_copies_total=1, no_of_copies_current=1)
         db.session.add(book_entry)
         db.session.commit()
 
@@ -103,7 +106,7 @@ def add_to_books():
         return "This book is already in stock"
 
     new_book = Books(bookID=book_id, title=title, authors=authors, isbn=isbn, publisher=publisher,
-                     no_of_copies_total=quantity)
+                     no_of_copies_total=quantity, no_of_copies_current=quantity)
     db.session.add(new_book)
     db.session.commit()
     return redirect(url_for("books"))
@@ -151,7 +154,51 @@ def delete_member(member_id):
 
 @app.route('/transactions', methods=["GET"])
 def transactions():
-    return render_template("transactions.html")
+    transactions_list = Transactions.query.all()
+    return render_template("transactions.html", transactions_list=transactions_list)
+
+
+@app.route('/issue-book', methods=["POST"])
+def issue_book():
+    username = request.form.get("username")
+    member = Members.query.filter_by(username=username).first()
+    username_rows = Members.query.filter_by(username=username).count()
+    book_id = request.form.get("book-id")
+    book = Books.query.filter_by(bookID=book_id)
+    book_item = book.first()
+    book_rows = book.count()
+    date_of_issue_string = request.form.get("date-of-issue")
+    datetime_of_issue = datetime.datetime.strptime(date_of_issue_string, "%Y-%m-%d")
+    date_of_issue = datetime_of_issue.date()
+    due_datetime = date_of_issue + datetime.timedelta(days=30)
+    due_date = due_datetime
+    current_stock = book_item.no_of_copies_current
+
+    print(username_rows)
+
+    if username_rows == 0:
+        return "Username does not exist"
+
+    elif book_rows == 0:
+        return "Book does not exist"
+
+    elif current_stock < 1:
+        return "There is not sufficient stock of this book"
+
+    elif member.has_borrowed:
+        return "This member has already borrowed a book"
+
+    title = book_item.title
+    authors = book_item.authors
+    book_item.no_of_copies_current = current_stock - 1
+    member.has_borrowed = True
+
+    new_transaction = Transactions(book_id=book_id, username=username, title=title, authors=authors,
+                                   date_of_issue=date_of_issue, due_date=due_date)
+    db.session.add(new_transaction)
+    db.session.commit()
+
+    return redirect(url_for("transactions"))
 
 
 if __name__ == "__main__":
