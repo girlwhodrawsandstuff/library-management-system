@@ -96,9 +96,27 @@
                     <td>{{ transaction.username }}</td>
                     <td>{{ transaction.title }}</td>
                     <td>{{ transaction.authors }}</td>
-                    <td>{{ transaction.date_of_issue }}</td>
-                    <td>{{ transaction.due_date }}</td>
-                    <td>{{ transaction.date_of_return }}</td>
+                    <td>
+                      {% if transaction.date_of_issue is not none %}
+                        {{ transaction.date_of_issue.date() }}
+                      {% else %}
+                        None
+                      {% endif%}
+                    </td>
+                    <td>
+                      {% if transaction.due_date is not none %}
+                        {{ transaction.due_date.date() }}
+                      {% else %}
+                        None
+                      {% endif%}
+                    </td>
+                    <td>
+                      {% if transaction.date_of_return is not none %}
+                        {{ transaction.date_of_return }}
+                      {% else %}
+                        None
+                      {% endif%}
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
