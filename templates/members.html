@@ -97,6 +97,30 @@
                 {% endfor %}
               </tbody>
             </table>
+
+            <details>
+              <summary>Edit Member Details</summary>
+              <p>Enter only the fields which you want to change.</p>
+              <form action="/edit-member" method="post">
+                <div>
+                  <label for="username">Current Username</label>
+                  <input type="text" name="username" placeholder="Current Username" required />
+                </div>
+                <div>
+                  <label for="new-username">New Username</label>
+                  <input type="text" name="new-username" placeholder="New Username" />
+                </div>
+                <div>
+                  <label for="first-name">First Name</label>
+                  <input type="text" name="first-name" placeholder="New First Name" />
+                </div>
+                <div>
+                  <label for="last-name">Last Name</label>
+                  <input type="text" name="last-name" placeholder="New Last Name" />
+                </div>
+                <button type="submit">Update</button>
+              </form>
+            </details>
           </div>
         </div>
       </div>

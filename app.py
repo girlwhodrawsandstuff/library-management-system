@@ -142,8 +142,41 @@ def add_to_members():
     first_name = request.form.get("first-name")
     last_name = request.form.get("last-name")
     new_member = Members(memberID=member_id, username=username, first_name=first_name, last_name=last_name)
+
     db.session.add(new_member)
     db.session.commit()
+
+    return redirect(url_for("members"))
+
+
+@app.route('/edit-member', methods=["POST"])
+def edit_member():
+    first_name = request.form.get("first-name").replace(" ", "")
+    last_name = request.form.get("last-name").replace(" ", "")
+    username = request.form.get("username").replace(" ", "")
+    new_username = request.form.get("new-username").replace(" ", "")
+
+    member_rows = Members.query.filter_by(username=username).count()
+    possible_member_rows = Members.query.filter_by(username=new_username).count()
+    member = Members.query.filter_by(username=username).first()
+
+    if member_rows == 0:
+        return "This username does not exist"
+
+    elif possible_member_rows != 0:
+        return "Sorry, this username already exists."
+
+    if first_name != '':
+        member.first_name = first_name
+
+    if last_name != '':
+        member.last_name = last_name
+
+    if new_username != '':
+        member.username = new_username
+
+    db.session.commit()
+
     return redirect(url_for("members"))
 
 
