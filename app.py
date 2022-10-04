@@ -34,20 +34,22 @@ class Books(db.Model):
 
 
 class Members(db.Model):
-    memberID = db.Column("id", db.String(255), primary_key=True, nullable=False)
+    memberID = db.Column(db.String(255), primary_key=True, nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
-    outstanding_debt = db.Column(db.Integer)
+    outstanding_debt = db.Column(db.Integer, default=0)
     has_borrowed = db.Column(db.Boolean, default=False)
     borrowed_from_date = db.Column(db.DateTime)
     borrowed_to_date = db.Column(db.DateTime)
     actual_return_date = db.Column(db.DateTime)
     book_id = db.Column(db.String(250), db.ForeignKey('books.bookID'))
+    transaction = db.relationship('Transactions', backref='owner', uselist=False)
+    transaction_id = db.Column(db.String(255))
 
 
 class Transactions(db.Model):
-    transaction_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    transaction_id = db.Column(db.String(255), primary_key=True, nullable=False)
     book_id = db.Column(db.String(250), nullable=False)
     username = db.Column(db.String(20), nullable=False)
     title = db.Column(db.String(250), nullable=False)
@@ -55,6 +57,7 @@ class Transactions(db.Model):
     date_of_issue = db.Column(db.DateTime)
     due_date = db.Column(db.DateTime)
     date_of_return = db.Column(db.DateTime)
+    member_id = db.Column(db.String(255), db.ForeignKey('members.memberID'))
 
 
 url = 'https://frappe.io/api/method/frappe-library'
@@ -160,6 +163,8 @@ def transactions():
 
 @app.route('/issue-book', methods=["POST"])
 def issue_book():
+    transaction_uuid = uuid.uuid4()
+    transaction_id = str(transaction_uuid)
     username = request.form.get("username")
     member = Members.query.filter_by(username=username).first()
     username_rows = Members.query.filter_by(username=username).count()
@@ -186,18 +191,65 @@ def issue_book():
     elif member.has_borrowed:
         return "This member has already borrowed a book"
 
+    elif member.outstanding_debt >= 100:
+        return "This member cannot borrow any books until their debt is cleared"
+
     title = book_item.title
     authors = book_item.authors
+    member_id = member.memberID
     book_item.no_of_copies_current = current_stock - 1
     member.has_borrowed = True
     member.borrowed_from_date = date_of_issue
     member.borrowed_to_date = due_date
     member.actual_return_date = None
     member.book_id = book_id
+    member.transaction_id = transaction_id
 
-    new_transaction = Transactions(book_id=book_id, username=username, title=title, authors=authors,
-                                   date_of_issue=date_of_issue, due_date=due_date)
+    new_transaction = Transactions(transaction_id=transaction_id, book_id=book_id, username=username, title=title,
+                                   authors=authors, date_of_issue=date_of_issue, due_date=due_date, member_id=member_id)
     db.session.add(new_transaction)
+    db.session.commit()
+
+    return redirect(url_for("transactions"))
+
+
+@app.route('/return-book', methods=["POST"])
+def return_book():
+    username = request.form.get("username")
+    member = Members.query.filter_by(username=username).first()
+    username_rows = Members.query.filter_by(username=username).count()
+    date_of_return_string = request.form.get("date-of-return")
+    datetime_of_return = datetime.datetime.strptime(date_of_return_string, "%Y-%m-%d")
+    date_of_return = datetime_of_return.date()
+    date_of_issue = member.borrowed_from_date.date()
+    date_difference = (date_of_return - date_of_issue).days
+    book_id = member.book_id
+    current_outstanding_debt = member.outstanding_debt
+
+    if username_rows == 0:
+        return "Username does not exist"
+
+    elif member.borrowed_from_date is None:
+        return "This member has not yet borrowed a book"
+
+    elif member.actual_return_date is not None:
+        return "This member has already returned their book, or is yet to borrow one"
+
+    elif date_difference < 0:
+        return "The book cannot be returned before it was borrowed"
+
+    elif date_difference > 30:
+        member.outstanding_debt = current_outstanding_debt + 100
+
+    book = Books.query.filter_by(bookID=book_id).first()
+    current_stock = book.no_of_copies_current
+    book.no_of_copies_current = current_stock + 1
+    member.actual_return_date = date_of_return
+    member.has_borrowed = False
+
+    transaction = Transactions.query.filter_by(transaction_id=member.transaction_id).first()
+    transaction.date_of_return = date_of_return
+
     db.session.commit()
 
     return redirect(url_for("transactions"))

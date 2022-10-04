@@ -43,20 +43,16 @@
               </details>
               <details class="transaction__detail">
                 <summary>Return Book</summary>
-                <form class="transaction__form">
+                <form class="transaction__form" action="/return-book" method="post">
                   <div class="transaction__form__item">
                     <label for="username">Username</label>
                     <input type="text" name="username" required />
                   </div>
                   <div class="transaction__form__item">
-                    <label for="book-id">Book ID</label>
-                    <input type="text" name="book-id" required />
-                  </div>
-                  <div class="transaction__form__item">
                     <label for="date-of-return">Date of Return</label>
                     <input type="date" name="date-of-return" required />
                   </div>
-                  <button type="submit">Issue Book</button>
+                  <button type="submit">Return Book</button>
                 </form>
               </details>
               <details class="transaction__detail">
@@ -104,7 +100,7 @@
                     </td>
                     <td>
                       {% if transaction.date_of_return is not none %}
-                        {{ transaction.date_of_return }}
+                        {{ transaction.date_of_return.date() }}
                       {% else %}
                         None
                       {% endif%}
