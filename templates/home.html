@@ -13,10 +13,17 @@
     ></script>
 </head>
 <body>
-    <h1 class="page__title">Library Management System</h1>
+    <div class="page">
+        <h1 class="page__title">Library Management System</h1>
 
-    <div class="page__section">
-        {% include 'navbar.html' %}
+        <div class="page__section">
+            {% include 'navbar.html' %}
+            <div class="page__main homepage__text">
+                <embed src="/static/images/book.svg" alt="black and white illustration of an open book" class="homepage__image"></embed>
+                <h2 class="homepage__heading">Library Management System is an open, editable library catalog, building towards a web page for every book ever published.</h2>
+                <p class="homepage__para">As of now, this is only used by librarians and not library members themselves.</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
