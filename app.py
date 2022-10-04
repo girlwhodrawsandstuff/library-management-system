@@ -191,7 +191,7 @@ def issue_book():
     elif member.has_borrowed:
         return "This member has already borrowed a book"
 
-    elif member.outstanding_debt >= 100:
+    elif member.outstanding_debt >= 500:
         return "This member cannot borrow any books until their debt is cleared"
 
     title = book_item.title
