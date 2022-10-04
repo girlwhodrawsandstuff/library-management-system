@@ -255,6 +255,22 @@ def return_book():
     return redirect(url_for("transactions"))
 
 
+@app.route('/clear-debt', methods=["POST"])
+def clear_debt():
+    username = request.form.get("username")
+    member = Members.query.filter_by(username=username).first()
+    username_rows = Members.query.filter_by(username=username).count()
+
+    if username_rows == 0:
+        return "Username does not exist"
+
+    member.outstanding_debt = 0
+
+    db.session.commit()
+
+    return redirect(url_for("transactions"))
+
+
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
