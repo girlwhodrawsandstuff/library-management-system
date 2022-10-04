@@ -63,10 +63,14 @@
             <button id="open-modal">
               Add New Book
             </button>
+            <div class="search-wrapper">
+              <label for="search">Search Books</label>
+              <input type="search" id="search-input" onkeyup="searchBook()">
+            </div>
           </div>
 
           <div class="table-container">
-            <table class="table">
+            <table class="table" id="books-table">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -82,8 +86,8 @@
                 {% for book in books %}
                 <tr>
                   <td>{{ book.bookID }}</td>
-                  <td>{{ book.title }}</td>
-                  <td>{{ book.authors }}</td>
+                  <td class="book-title">{{ book.title }}</td>
+                  <td class="book-authors">{{ book.authors }}</td>
                   <td>{{ book.isbn }}</td>
                   <td>{{ book.publisher }}</td>
                   <td>{{ book.no_of_copies_total}}</td>
@@ -98,5 +102,6 @@
     </div>
 
     <script src="/static/js/utils.js"></script>
+    <script src="/static/js/books.js" defer></script>
   </body>
 </html>
