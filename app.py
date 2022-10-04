@@ -238,13 +238,11 @@ def return_book():
     elif date_difference < 0:
         return "The book cannot be returned before it was borrowed"
 
-    elif date_difference > 30:
-        member.outstanding_debt = current_outstanding_debt + 100
-
     book = Books.query.filter_by(bookID=book_id).first()
     current_stock = book.no_of_copies_current
     book.no_of_copies_current = current_stock + 1
     member.actual_return_date = date_of_return
+    member.outstanding_debt = current_outstanding_debt + 100
     member.has_borrowed = False
 
     transaction = Transactions.query.filter_by(transaction_id=member.transaction_id).first()
