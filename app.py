@@ -242,11 +242,15 @@ def return_book():
     current_stock = book.no_of_copies_current
     book.no_of_copies_current = current_stock + 1
     member.actual_return_date = date_of_return
-    member.outstanding_debt = current_outstanding_debt + 100
     member.has_borrowed = False
 
     transaction = Transactions.query.filter_by(transaction_id=member.transaction_id).first()
     transaction.date_of_return = date_of_return
+
+    if date_difference >= 30:
+        member.outstanding_debt = current_outstanding_debt + 100
+    else:
+        member.outstanding_debt = current_outstanding_debt + 50
 
     db.session.commit()
 
