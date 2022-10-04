@@ -97,6 +97,38 @@
               </tbody>
             </table>
           </div>
+
+          <details>
+            <summary>Edit Book Details</summary>
+            <p>Enter only the fields which you want to change.</p>
+            <form action="/edit-book" method="post">
+              <div>
+                <label for="book-id">Book ID</label>
+                <input type="text" name="book-id" placeholder="Book ID" required />
+              </div>
+              <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" placeholder="New Book Title" />
+              </div>
+              <div>
+                <label for="authors">Authors</label>
+                <input type="text" name="authors" placeholder="New Authors" />
+              </div>
+              <div>
+                <label for="isbn">ISBN</label>
+                <input type="text" name="isbn" placeholder="New ISBN" />
+              </div>
+              <div>
+                <label for="publisher">Publisher</label>
+                <input type="text" name="publisher" placeholder="New Publisher" />
+              </div>
+              <div>
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" placeholder="Add Additional Stock" required />
+              </div>
+              <button type="submit">Update</button>
+            </form>
+          </details>
         </div>
       </div>
     </div>

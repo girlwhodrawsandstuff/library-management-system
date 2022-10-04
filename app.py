@@ -115,6 +115,51 @@ def add_to_books():
     return redirect(url_for("books"))
 
 
+@app.route('/edit-book', methods=["POST"])
+def edit_book():
+    book_id = request.form.get("book-id").strip()
+    new_title = request.form.get("title").strip()
+    new_authors = request.form.get("authors").strip()
+    new_isbn = request.form.get("isbn").strip()
+    new_publisher = request.form.get("publisher").strip()
+    updated_quantity = int(request.form.get("quantity"))
+
+    book_rows = Books.query.filter_by(bookID=book_id).count()
+    book = Books.query.filter_by(bookID=book_id).first()
+
+    current_isbn = Books.query.filter_by(isbn=new_isbn).count()
+
+    if book_rows == 0:
+        return "This book doesn't exist in the table"
+
+    elif updated_quantity < 0:
+        return "The quantity cannot be a negative number"
+
+    elif current_isbn != 0:
+        return "There is already a book with this ISBN present"
+
+    if new_title != '':
+        book.title = new_title
+
+    if new_authors != '':
+        book.authors = new_authors
+
+    if new_isbn != '':
+        book.isbn = new_isbn
+
+    if new_publisher != '':
+        book.publisher = new_publisher
+
+    current_copies = book.no_of_copies_current
+    current_total_copies = book.no_of_copies_total
+    book.no_of_copies_total = current_total_copies + updated_quantity
+    book.no_of_copies_current = current_copies + updated_quantity
+
+    db.session.commit()
+
+    return redirect(url_for("books"))
+
+
 @app.route('/delete-book/<string:book_id>')
 def delete_book(book_id):
     book = Books.query.filter_by(bookID=book_id).first()
