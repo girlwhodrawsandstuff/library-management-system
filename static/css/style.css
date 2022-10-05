@@ -58,6 +58,10 @@
     border-right: 1px solid #e7e7e7;
 }
 
+.column__numbers {
+    text-align: center;
+}
+
 .page__tools {
     display: flex;
     align-items: center;

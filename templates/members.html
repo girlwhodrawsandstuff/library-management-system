@@ -70,28 +70,28 @@
                   <td class="table__column">{{ member.username }}</td>
                   <td class="table__column">{{ member.first_name }}</td>
                   <td class="table__column">{{ member.last_name }}</td>
-                  <td class="table__column">{{ member.book_id }}</td>
-                  <td class="table__column">
+                  <td class="table__column column__numbers">{{ member.book_id }}</td>
+                  <td class="table__column column__numbers">
                     {% if member.borrowed_from_date is not none %}
                       {{ member.borrowed_from_date.date() }}
                     {% else %}
                       None
                     {% endif%}
                   </td>
-                  <td class="table__column">
+                  <td class="table__column column__numbers">
                     {% if member.borrowed_to_date is not none %}
                       {{ member.borrowed_to_date.date() }}
                     {% else %}
                       None
                     {% endif%}
                   </td>
-                  <td class="table__column">{% if member.actual_return_date is not none %}
+                  <td class="table__column column__numbers">{% if member.actual_return_date is not none %}
                         {{ member.actual_return_date.date() }}
                       {% else %}
                         None
                       {% endif%}
                   </td>
-                  <td class="table__column">{{ member.outstanding_debt }}</td>
+                  <td class="table__column column__numbers">₹{{ member.outstanding_debt }}</td>
                   <td><span class="icon"><a href="/delete-member/{{ member.memberID }}"><i class="fas fa-trash"></i></span></a></td>
                 </tr>
                 {% endfor %}
