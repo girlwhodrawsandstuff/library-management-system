@@ -38,7 +38,7 @@
                     <label for="date-of-issue">Date of Issue</label>
                     <input type="date" name="date-of-issue" required />
                   </div>
-                  <button type="submit">Issue Book</button>
+                  <button type="submit" class="page__tools__button">Issue Book</button>
                 </form>
               </details>
               <details class="transaction__detail">
@@ -52,7 +52,7 @@
                     <label for="date-of-return">Date of Return</label>
                     <input type="date" name="date-of-return" required />
                   </div>
-                  <button type="submit">Return Book</button>
+                  <button type="submit" class="page__tools__button">Return Book</button>
                 </form>
               </details>
               <details class="transaction__detail">
@@ -62,43 +62,43 @@
                     <label for="username">Username</label>
                     <input type="text" name="username" required />
                   </div>
-                  <button type="submit">Clear Outstanding Debt</button>
+                  <button type="submit" class="page__tools__button">Clear Outstanding Debt</button>
                 </form>
               </details>
             </div>
-            <div class="transaction__table">
-              <table>
+            <div class="transaction__table table-container">
+              <table class="table">
                 <thead>
                   <tr>
-                    <th>Member</th>
-                    <th>Book Borrowed</th>
-                    <th>Authors</th>
-                    <th>Date of Issue</th>
-                    <th>Due Date</th>
-                    <th>Date of Return</th>
+                    <th class="table__column">Member</th>
+                    <th class="table__column">Book Borrowed</th>
+                    <th class="table__column">Authors</th>
+                    <th class="table__column">Date of Issue</th>
+                    <th class="table__column">Due Date</th>
+                    <th class="table__column">Date of Return</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for transaction in transactions_list %}
                   <tr>
-                    <td>{{ transaction.username }}</td>
-                    <td>{{ transaction.title }}</td>
-                    <td>{{ transaction.authors }}</td>
-                    <td>
+                    <td class="table__column column__text">{{ transaction.username }}</td>
+                    <td class="table__column column__text">{{ transaction.title }}</td>
+                    <td class="table__column column__text">{{ transaction.authors }}</td>
+                    <td class="table__column column__numbers date">
                       {% if transaction.date_of_issue is not none %}
                         {{ transaction.date_of_issue.date() }}
                       {% else %}
                         None
                       {% endif%}
                     </td>
-                    <td>
+                    <td class="table__column column__numbers date">
                       {% if transaction.due_date is not none %}
                         {{ transaction.due_date.date() }}
                       {% else %}
                         None
                       {% endif%}
                     </td>
-                    <td>
+                    <td class="table__column column__numbers date">
                       {% if transaction.date_of_return is not none %}
                         {{ transaction.date_of_return.date() }}
                       {% else %}

@@ -98,35 +98,35 @@
             </table>
           </div>
 
-          <details>
+          <details class="edit-details">
             <summary>Edit Book Details</summary>
-            <p>Enter only the fields which you want to change.</p>
-            <form action="/edit-book" method="post">
-              <div>
+            <p class="edit-para">Enter only the fields which you want to change.</p>
+            <form action="/edit-book" method="post" class="form-details">
+              <div class="form-details__item">
                 <label for="book-id">Book ID</label>
                 <input type="text" name="book-id" placeholder="Book ID" required />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="title">Title</label>
                 <input type="text" name="title" placeholder="New Book Title" />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="authors">Authors</label>
                 <input type="text" name="authors" placeholder="New Authors" />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="isbn">ISBN</label>
                 <input type="text" name="isbn" placeholder="New ISBN" />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="publisher">Publisher</label>
                 <input type="text" name="publisher" placeholder="New Publisher" />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="quantity">Quantity</label>
                 <input type="number" name="quantity" placeholder="Add Additional Stock" required />
               </div>
-              <button type="submit">Update</button>
+              <button type="submit" class="page__tools__button form-details__item">Update</button>
             </form>
           </details>
         </div>

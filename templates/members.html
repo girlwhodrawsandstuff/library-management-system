@@ -99,27 +99,27 @@
             </table>
           </div>
 
-          <details>
+          <details class="edit-details">
             <summary>Edit Member Details</summary>
-            <p>Enter only the fields which you want to change.</p>
-            <form action="/edit-member" method="post">
-              <div>
+            <p class="edit-para">Enter only the fields which you want to change.</p>
+            <form action="/edit-member" method="post" class="form-details">
+              <div class="form-details__item">
                 <label for="username">Current Username</label>
                 <input type="text" name="username" placeholder="Current Username" required />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="new-username">New Username</label>
                 <input type="text" name="new-username" placeholder="New Username" />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="first-name">First Name</label>
                 <input type="text" name="first-name" placeholder="New First Name" />
               </div>
-              <div>
+              <div class="form-details__item">
                 <label for="last-name">Last Name</label>
                 <input type="text" name="last-name" placeholder="New Last Name" />
               </div>
-              <button type="submit">Update</button>
+              <button type="submit" class="page__tools__button form-details__item">Update</button>
             </form>
           </details>
         </div>
