@@ -53,45 +53,45 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Username</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Borrowed Book</th>
-                  <th>Date of Issue</th>
-                  <th>Due Date</th>
-                  <th>Date of Return</th>
-                  <th>Outstanding Debt</th>
+                  <th class="table__column">Username</th>
+                  <th class="table__column">First Name</th>
+                  <th class="table__column">Last Name</th>
+                  <th class="table__column">Borrowed Book</th>
+                  <th class="table__column">Date of Issue</th>
+                  <th class="table__column">Due Date</th>
+                  <th class="table__column">Date of Return</th>
+                  <th class="table__column">Outstanding Debt</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {% for member in members %}
                 <tr>
-                  <td>{{ member.username }}</td>
-                  <td>{{ member.first_name }}</td>
-                  <td>{{ member.last_name }}</td>
-                  <td>{{ member.book_id }}</td>
-                  <td>
+                  <td class="table__column">{{ member.username }}</td>
+                  <td class="table__column">{{ member.first_name }}</td>
+                  <td class="table__column">{{ member.last_name }}</td>
+                  <td class="table__column">{{ member.book_id }}</td>
+                  <td class="table__column">
                     {% if member.borrowed_from_date is not none %}
                       {{ member.borrowed_from_date.date() }}
                     {% else %}
                       None
                     {% endif%}
                   </td>
-                  <td>
+                  <td class="table__column">
                     {% if member.borrowed_to_date is not none %}
                       {{ member.borrowed_to_date.date() }}
                     {% else %}
                       None
                     {% endif%}
                   </td>
-                  <td>{% if member.actual_return_date is not none %}
+                  <td class="table__column">{% if member.actual_return_date is not none %}
                         {{ member.actual_return_date.date() }}
                       {% else %}
                         None
                       {% endif%}
                   </td>
-                  <td>{{ member.outstanding_debt }}</td>
+                  <td class="table__column">{{ member.outstanding_debt }}</td>
                   <td><span class="icon"><a href="/delete-member/{{ member.memberID }}"><i class="fas fa-trash"></i></span></a></td>
                 </tr>
                 {% endfor %}

@@ -44,6 +44,18 @@
 
 .table {
     width: 100%;
+    box-sizing: border-box;
+    border-spacing: 0;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.table thead {
+    height: 50px;
+    background-color: #bbd3e9;
+}
+
+.table__column {
+    border-right: 1px solid #e7e7e7;
 }
 
 .page__tools {
