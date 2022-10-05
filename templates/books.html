@@ -19,35 +19,35 @@
         <div class="modal__content">
           <div class="modal__close">
             <button class="modal__close__button" id="close-modal">
-              &times;
+              <i class="fas fa-times"></i>
             </button>
           </div>
-          <form action="/add-book" method="post">
-             <div>
+          <form action="/add-book" method="post" class="modal__form">
+             <div class="modal-form__item">
               <label for="book_id">Book ID</label>
               <input type="text" name="book_id" id="book_id" required />
             </div>
-            <div>
+            <div class="modal-form__item">
               <label for="title">Title</label>
               <input type="text" name="title" id="title" required />
             </div>
-            <div>
+            <div class="modal-form__item">
               <label for="authors">Authors</label>
               <input type="text" name="authors" id="authors" required />
             </div>
-            <div>
+            <div class="modal-form__item">
               <label for="isbn">ISBN</label>
               <input type="text" name="isbn" id="isbn" required />
             </div>
-            <div>
+            <div class="modal-form__item">
               <label for="publisher">Publisher</label>
               <input type="text" name="publisher" id="publisher" required />
             </div>
-            <div>
+            <div class="modal-form__item">
               <label for="quantity">Quantity</label>
               <input type="number" name="quantity" id="quantity" required />
             </div>
-            <button type="submit">Add Book</button>
+            <button type="submit" class="page__tools__button modal-form__submit">Add Book</button>
           </form>
         </div>
       </div>

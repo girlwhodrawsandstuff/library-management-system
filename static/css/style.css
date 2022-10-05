@@ -112,6 +112,63 @@
     color: #0e69b9;
 }
 
+.page__modal {
+    display: flex;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #0000004d;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+}
+
+.page__modal.show-modal {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.modal__content {
+    width: 300px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 24px;
+}
+
+.modal__close {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+.modal__close__button {
+    color: #525151;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.modal__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-form__item {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+.modal-form__submit {
+    margin-top: 24px;
+}
+
 /* navbar.html */
 .sidebar {
     box-sizing: border-box;
@@ -163,41 +220,6 @@
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
-}
-
-
-/* books.html */
-.page__modal {
-    display: flex;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #0000004d;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s;
-}
-
-.page__modal.show-modal {
-    pointer-events: auto;
-    opacity: 1;
-}
-
-.modal__content {
-    width: 300px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #ffffff;
-}
-
-.modal__close {
-    display: flex;
-    justify-content: flex-end;
 }
 
 

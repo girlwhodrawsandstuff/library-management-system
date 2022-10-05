@@ -18,23 +18,23 @@
         <div class="modal__content">
           <div class="modal__close">
             <button class="modal__close__button" id="close-modal">
-              &times;
+              <i class="fas fa-times"></i>
             </button>
           </div>
-          <form action="/add-member" method="post">
-            <div>
+          <form action="/add-member" method="post" class="modal__form">
+            <div class="modal-form__item">
               <label for="first-name">First Name</label>
               <input type="text" name="first-name" id="first-name" />
             </div>
-            <div>
+            <div class="modal-form__item">
               <label for="last-name">Last Name</label>
               <input type="text" name="last-name" id="last-name" />
             </div>
-            <div>
+            <div class="modal-form__item">
               <label for="username">Username</label>
               <input type="text" name="username" id="username" />
             </div>
-            <button type="submit">Add Member</button>
+            <button type="submit" class="page__tools__button modal-form__submit">Add Member</button>
           </form>
         </div>
       </div>
