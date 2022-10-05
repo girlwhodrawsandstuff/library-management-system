@@ -58,15 +58,15 @@
         {% include 'navbar.html' %}
 
         <div class="page__main">
-          <h2>Books</h2>
+          <h2 class="page__subheading">Books</h2>
           <div class="page__tools">
-            <button id="open-modal">
-              Add New Book
-            </button>
             <div class="search-wrapper">
-              <label for="search">Search Books</label>
+              <label for="search" class="tools__label">Search Books</label>
               <input type="search" id="search-input" onkeyup="searchBook()">
             </div>
+            <button id="open-modal" class="page__tools__button">
+              Add New Book
+            </button>
           </div>
 
           <div class="table-container">

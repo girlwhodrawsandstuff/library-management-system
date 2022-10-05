@@ -15,6 +15,13 @@
 
 .page__title {
     padding: 24px;
+    background: #f1f1f1;
+    color: #525151;
+}
+
+.page__subheading {
+    color: #525151;
+    margin: 24px 0;
 }
 
 .page__section {
@@ -30,11 +37,35 @@
     height: 54vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    border: 1px solid #e7e7e7;
+    max-width: 100%;
 }
 
 .table {
-    max-width: 100%;
+    width: 100%;
 }
+
+.page__tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0;
+}
+
+.page__tools__button {
+    border: none;
+    border-radius: 4px;
+    width: 148px;
+    height: 36px;
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #0e69b9;
+}
+
+.tools__label {
+    color: #525151;
+}
+
 
 /* navbar.html */
 .sidebar {
@@ -90,13 +121,7 @@
 }
 
 
-
 /* books.html */
-.page__tools {
-    display: flex;
-    align-items: center;
-}
-
 .page__modal {
     display: flex;
     position: fixed;
@@ -185,9 +210,16 @@
     text-align: center;
     width: 60%;
     line-height: 40px;
+    color: #525151;
 }
 
 .homepage__para {
     margin-top: 16px;
     color: #0e69b9;
+}
+
+/* Members */
+.member__tools{
+    display: flex;
+    justify-content: flex-end;
 }
