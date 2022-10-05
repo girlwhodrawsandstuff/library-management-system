@@ -86,12 +86,12 @@
                 {% for book in books %}
                 <tr>
                   <td class="table__column column__numbers" >{{ book.bookID }}</td>
-                  <td class="table__column book-title">{{ book.title }}</td>
-                  <td class="table__column book-authors">{{ book.authors }}</td>
+                  <td class="table__column column__text book-title">{{ book.title }}</td>
+                  <td class="table__column column__text book-authors">{{ book.authors }}</td>
                   <td class="table__column column__numbers">{{ book.isbn }}</td>
-                  <td class="table__column">{{ book.publisher }}</td>
+                  <td class="table__column column__text">{{ book.publisher }}</td>
                   <td class="table__column column__numbers">{{ book.no_of_copies_total}}</td>
-                  <td><span class="icon"><a href="/delete-book/{{ book.bookID }}"><i class="fas fa-trash"></i></span></a></td>
+                  <td><span class="icon"><a href="/delete-book/{{ book.bookID }}" class="delete-icon"><i class="fas fa-trash"></i></span></a></td>
                 </tr>
                 {% endfor %}
               </tbody>

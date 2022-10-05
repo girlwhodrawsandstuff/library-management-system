@@ -67,9 +67,9 @@
               <tbody>
                 {% for member in members %}
                 <tr>
-                  <td class="table__column">{{ member.username }}</td>
-                  <td class="table__column">{{ member.first_name }}</td>
-                  <td class="table__column">{{ member.last_name }}</td>
+                  <td class="table__column column__text">{{ member.username }}</td>
+                  <td class="table__column column__text">{{ member.first_name }}</td>
+                  <td class="table__column column__text">{{ member.last_name }}</td>
                   <td class="table__column column__numbers">{{ member.book_id }}</td>
                   <td class="table__column column__numbers">
                     {% if member.borrowed_from_date is not none %}
@@ -92,7 +92,7 @@
                       {% endif%}
                   </td>
                   <td class="table__column column__numbers">₹{{ member.outstanding_debt }}</td>
-                  <td><span class="icon"><a href="/delete-member/{{ member.memberID }}"><i class="fas fa-trash"></i></span></a></td>
+                  <td><span class="icon"><a href="/delete-member/{{ member.memberID }}" class="delete-icon"><i class="fas fa-trash"></i></span></a></td>
                 </tr>
                 {% endfor %}
               </tbody>
