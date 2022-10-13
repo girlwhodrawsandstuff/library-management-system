@@ -1,3 +1,10 @@
 # python specific
 __pycache__/
 *.pyc
+
+# ide specific
+workspace.xml
+vsc.xml
+
+# virtual environment
+venv
