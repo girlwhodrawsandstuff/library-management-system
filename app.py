@@ -78,12 +78,13 @@ def add_to_database(list_of_dicts):
         db.session.add(book_entry)
         db.session.commit()
 
-
-add_to_database(obj)
+with app.app_context():
+    db.create_all()
+    add_to_database(obj)
 
 
 @app.route('/')
-def helloworld():
+def home():
     return render_template("home.html")
 
 
@@ -352,5 +353,4 @@ def clear_debt():
 
 
 if __name__ == "__main__":
-    db.create_all()
     app.run(debug=True)
